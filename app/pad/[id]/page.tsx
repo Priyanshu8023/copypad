@@ -1,6 +1,6 @@
 import Editor from "@/components/Editor"
 
-export default function PadPage({
+export default await function  PadPage({
     params,
 }:{
     params:{id:string};
