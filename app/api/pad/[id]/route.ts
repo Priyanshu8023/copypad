@@ -35,6 +35,7 @@ export async function POST(
         const content = await req.json().catch(()=>({}));
 
         if(typeof content !== "string" || content.length > 5000){
+            console.log("Invalid String")
             return NextResponse.json({error:"Invalid Content: Length should be under 50K char"},{status:400});
         }
 

@@ -1,11 +1,11 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = global as unknown as {
     prisma:PrismaClient|undefined;
 }
 
 const prisma = globalForPrisma.prisma ?? new PrismaClient({
-        log:process.env.NODE_ENV === "development" ? ["query","error","warm"]:["error"],
+        log:process.env.NODE_ENV === "development" ? ["query","error","warn"]:["error"],
     });
 
 if (process.env.NODE_ENV !== "production"){
