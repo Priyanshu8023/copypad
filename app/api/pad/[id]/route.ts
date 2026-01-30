@@ -32,10 +32,11 @@ export async function POST(
     try{
         const {id}=await params;
 
-        const content = await req.json().catch(()=>({}));
+        const {content} = await req.json().catch(()=>({}));
 
         if(typeof content !== "string" || content.length > 5000){
-            return NextResponse.json({error:"Invalid Content: Length should be under 50K char"},{status:400});
+            console.log("Invalid String")
+            return NextResponse.json({error:"Invalid Content: Length should be under 5K char"},{status:400});
         }
 
         await prisma.pad.update({

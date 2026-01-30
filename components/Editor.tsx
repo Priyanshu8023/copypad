@@ -5,6 +5,8 @@ import { usePad } from "@/hook/usePad"
 export default function Editor({padId}:{padId:string}){
     const {content, setContent,isSaving}=usePad(padId);
 
+    
+
     return (
         <>
             <main className="relative w-full h-screen">

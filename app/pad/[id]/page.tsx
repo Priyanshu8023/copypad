@@ -1,10 +1,12 @@
 import Editor from "@/components/Editor"
 
-export default await function  PadPage({
+
+export default async function PadPage({
     params,
-}:{
-    params:{id:string};
-}    
-){
-    return <Editor padId={params.id} />;
+}: {
+    params: Promise<{ id: string }>
+}
+) {
+    const { id } = await params;
+    return <Editor padId={id} />;
 }
