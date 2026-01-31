@@ -10,11 +10,15 @@ export async function GET(
     try{
         const { id } = await params;
 
-        const pad = await prisma.pad.upsert({
-            where:{ id },
-            update:{},
-            create:{id, content:""},
-        });
+        let pad= await prisma.pad.findUnique({
+            where:{id},
+        })
+
+        if(!pad){
+            pad = await prisma.pad.create({
+                data:{ id , content:""},
+            });
+        }
 
         return NextResponse.json(pad);
     }catch(error){
