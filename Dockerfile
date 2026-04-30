@@ -1,13 +1,13 @@
 FROM node:20.18-alpine AS deps
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat python3 make g++ gcc
 WORKDIR /app
 
 # Copy package files
 COPY package.json package-lock.json ./
 COPY prisma ./prisma/
 
-# Install dependencies including Prisma
-RUN npm ci
+# Install dependencies
+RUN npm install --legacy-peer-deps
 
 # Stage 2: Build the application
 FROM node:20.18-alpine AS builder
