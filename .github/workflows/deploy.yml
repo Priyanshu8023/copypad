@@ -48,6 +48,12 @@ jobs:
             docker stop copypad || true
             docker rm copypad || true
             
+            # CRITICAL: Push database schema changes to RDS before starting the app
+            docker run --rm \
+              -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+              ${{ secrets.DOCKERHUB_USERNAME }}/copypad:latest \
+              npx prisma db push
+            
             # Run the new container with log limits and production env
             docker run -d \
               --name copypad \
